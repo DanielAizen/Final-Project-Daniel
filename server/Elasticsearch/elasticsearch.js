@@ -22,4 +22,4 @@ function logEvent( err, meta ){
 }
 */
 
-export default elasticseacrh;
+//export default elasticseacrh;

@@ -5,10 +5,11 @@
     "main": "server.js",
     "dependencies": {
         "@elastic/elasticsearch": "^8.0.0",
-        "body-parser": "*",
-        "cors": "2.8.5",
-        "express": "4.17.2",
+        "body-parser": "^1.19.2",
+        "cors": "^2.8.5",
+        "express": "^4.17.2",
         "helmet": "^5.0.2",
+        "mysql": "^2.18.1",
         "nodemom": "1.18.3"
     },
     "scripts": {
