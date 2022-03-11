@@ -1,16 +1,15 @@
 //Imports
-const ES =  require('./Elasticsearch/elasticsearch');
-const sql = require('./mysql_handler');
-//import sql from './mysql_handler';
-
-const mysql = require('mysql');
-
-// Express App Setup
-const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const helmet = require("helmet");
-
+//import ES from './Elasticsearch/elasticsearch'
+import {connection, basicQ} from './mysql_handler.js';
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
+import helmet from 'helmet';
+import { genarate_token } from './Users/authinticate.js';
+import usersRoutes from './Routes/user.js'
+//const ES =  require('./Elasticsearch/elasticsearch');
+//const sql = require('./mysql_handler');
+//import {connect_to_db} from '../mysql_handler'
 
 //Express app setup
 const app = express();
@@ -18,33 +17,49 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(helmet())
 
-/*const connection = mysql.createConnection({
-    //properties
-    host:'localhost',
-    user: 'root',
-    password: 'D@n!764IzEn',
-    database: 'finalproject'
-});*/
-
-
 
 //Express route handlers
 app.get('/', (req, res)=>{
     res.send('test');
 });
 
+/*app.get('/users', (req, res) =>{
+    res.json(users);
+});*/
+
+app.get('/test_sql', async (req, res) => {
+    connection.query(`SELECT * FROM test_tbl2`, (error, rows) => {
+        if(error) throw error;
+        console.log("connected to db");
+        const myResponse = {"status": 200, "msg": "retrived data from db", "result": rows}
+        res.json(myResponse);
+    });
+    connection.end(error => {
+        if (error) throw error;
+        console.log("connection closed");
+    })
+    
+});
+
+app.get('/test_sql2', async (req, res) => {
+    connection.query(basicQ, (error, rows) => {
+        if(error) throw error;
+        const myResponse = {"status": 200, "msg": "retrived data from db", "result": rows}
+        res.send(myResponse);
+    });
+    connection.end(error => {
+        if (error) throw error;
+        console.log("connection closed");
+    })
+    
+});
 
 //Port definition
 const port = process.env.PORT || 5000;
 app.listen(port, ()=> {
     console.log(`Listening on port ${port}`);
-    sql.connect(function(error){
-        if(error){
-            throw error;
-        }
-        console.log(`Connected to database`)
-        
-    })
-})
+    console.log(genarate_token());
+});
 
+app.use('/users', usersRoutes)
 

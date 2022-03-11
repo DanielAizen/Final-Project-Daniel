@@ -1,6 +1,17 @@
-const mysql = require('mysql');
+import mysql from 'mysql';
 
-const connection = mysql.createConnection({
+ const queryTypes = {
+    SELECT: 'select',
+    UPDATE: 'update',
+    INSERT: 'insert',
+    DELETE: 'delete'
+};
+
+//Tables:
+//test_tbl2:
+const TEST_TBL2 = 'test_tbl2'
+
+export const connection = mysql.createConnection({
     //properties
     host:'localhost',
     user: 'root',
@@ -8,12 +19,6 @@ const connection = mysql.createConnection({
     database: 'finalproject'
 });
 
-/*connection.connect(function(error){
-    if(error){
-        console.log(`Couldn't connect to ${connection.database}!` );
-    }else{
-        console.log(`Connected to ${connection.database}`)
-    }
-})*/
+export const basicQ = `SELECT * FROM test_tbl2 WHERE id=1`;
 
-module.exports = connection;
+

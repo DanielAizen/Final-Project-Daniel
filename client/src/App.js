@@ -9,6 +9,7 @@ function App() {
   const user = 1;
   return (
     <div className="App">
+      <h1> in react app</h1>
       <BrowserRouter>
         <Routes>
           <Route path='/home' element={<Home/>}/>
