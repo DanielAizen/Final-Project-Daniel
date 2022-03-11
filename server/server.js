@@ -28,6 +28,10 @@ app.get('/', (req, res)=>{
 });*/
 
 app.get('/test_sql', async (req, res) => {
+    /*connection.connect(error =>{
+        if(error) throw error;
+        console.log("connected to db");
+    });*/
     connection.query(`SELECT * FROM test_tbl2`, (error, rows) => {
         if(error) throw error;
         console.log("connected to db");
@@ -42,6 +46,10 @@ app.get('/test_sql', async (req, res) => {
 });
 
 app.get('/test_sql2', async (req, res) => {
+    /*connection.connect(error =>{
+        if(error) throw error;
+        console.log("connected to db");
+    });*/
     connection.query(basicQ, (error, rows) => {
         if(error) throw error;
         const myResponse = {"status": 200, "msg": "retrived data from db", "result": rows}
