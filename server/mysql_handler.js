@@ -8,8 +8,9 @@ import mysql from 'mysql';
 };
 
 //Tables:
-//test_tbl2:
-const TEST_TBL2 = 'test_tbl2'
+export const TEST_TBL = 'test_tbl2';
+export const USER_INFO = 'user_info';
+
 
 export const connection = mysql.createConnection({
     //properties
@@ -20,5 +21,3 @@ export const connection = mysql.createConnection({
 });
 
 export const basicQ = `SELECT * FROM test_tbl2 WHERE id=1`;
-
-

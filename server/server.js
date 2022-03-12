@@ -1,6 +1,6 @@
 //Imports
 //import ES from './Elasticsearch/elasticsearch'
-import {connection, basicQ} from './mysql_handler.js';
+import * as sql from './mysql_handler.js';
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
@@ -32,17 +32,12 @@ app.get('/test_sql', async (req, res) => {
         if(error) throw error;
         console.log("connected to db");
     });*/
-    connection.query(`SELECT * FROM test_tbl2`, (error, rows) => {
+    sql.connection.query(`SELECT * FROM test_tbl2`, (error, rows) => {
         if(error) throw error;
         console.log("connected to db");
         const myResponse = {"status": 200, "msg": "retrived data from db", "result": rows}
         res.json(myResponse);
     });
-    connection.end(error => {
-        if (error) throw error;
-        console.log("connection closed");
-    })
-    
 });
 
 app.get('/test_sql2', async (req, res) => {
@@ -50,23 +45,18 @@ app.get('/test_sql2', async (req, res) => {
         if(error) throw error;
         console.log("connected to db");
     });*/
-    connection.query(basicQ, (error, rows) => {
+    sql.connection.query(basicQ, (error, rows) => {
         if(error) throw error;
         const myResponse = {"status": 200, "msg": "retrived data from db", "result": rows}
         res.send(myResponse);
-    });
-    connection.end(error => {
-        if (error) throw error;
-        console.log("connection closed");
-    })
-    
+    });    
 });
 
 //Port definition
 const port = process.env.PORT || 5000;
 app.listen(port, ()=> {
     console.log(`Listening on port ${port}`);
-    console.log(genarate_token());
+    console.log(sql.USER_INFO); // think on a better way to show this
 });
 
 app.use('/users', usersRoutes)
