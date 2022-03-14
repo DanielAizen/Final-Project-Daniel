@@ -12,7 +12,8 @@ function App() {
       <h1> in react app</h1>
       <BrowserRouter>
         <Routes>
-          <Route path='/home' element={<Home/>}/>
+          <Route path='/' element={<Home/>}/>
+          <Route exact path="/login" element={<Login />}/>
           <Route exact path='/login'>
             {/*user ? <Redirect to =*/}
           </Route>
