@@ -1,7 +1,8 @@
 import './App.css';
-import Login from './Components/Login';
-import Signup from './Components/Signup';
-import Home from './Components/Home';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Login from './Components/Login/Login';
+import Signup from './Components/Signup/Signup';
+import Home from './Components/Home/Home';
 import { BrowserRouter ,Routes, Route, Navigate, Redirect } from 'react-router-dom';
 
 function App() {
@@ -9,7 +10,6 @@ function App() {
   const user = 1;
   return (
     <div className="App">
-      <h1> in react app</h1>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>}/>
