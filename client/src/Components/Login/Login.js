@@ -24,7 +24,7 @@ const Login = () =>{
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder='Enter your password'/>    
                         </Form.Group>
-                        <Button variant='primary' type='submit' onClick={handleLogin}>Submit</Button>   
+                        <Button variant='primary' type='submit' onClick={(e) => handleLogin()}>Submit</Button>   
                     </Form>
                 </Card> 
             </div>
