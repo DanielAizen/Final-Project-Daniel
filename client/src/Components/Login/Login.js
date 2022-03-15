@@ -4,6 +4,11 @@ import { Form, Button, Card } from 'react-bootstrap';
 import './Login.css';
 
 const Login = () =>{
+    const handleLogin = (e) =>{
+        e.preventDefault();
+        const username = document.getElementById("form-username");
+        const password = document.getElementById("form-password");
+    }
     return(
         <div>
             <h1>Testing login</h1>
@@ -19,7 +24,7 @@ const Login = () =>{
                             <Form.Label>Password</Form.Label>
                             <Form.Control type="password" placeholder='Enter your password'/>    
                         </Form.Group>
-                        <Button variant='primary' type='submit'>Submit</Button>   
+                        <Button variant='primary' type='submit' onClick={handleLogin}>Submit</Button>   
                     </Form>
                 </Card> 
             </div>
