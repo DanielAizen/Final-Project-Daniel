@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React,{ useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button, Card } from 'react-bootstrap';
 
@@ -25,7 +25,8 @@ const Login = () =>{
         .then(response => response.json())
         .then(response => {
             if (response.status === 200){
-                navigate('/home');
+                console.log(response);
+                navigate('/management');
             }
             else{
                 setInputError(response.msg);

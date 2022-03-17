@@ -1,6 +1,5 @@
 import * as auth from './authinticate.js';
 import * as sql from '../mysql_handler.js';
-import bcrypt from 'bcrypt';
 
 export const getAllUsers = (req, res) =>{
     //res.send(users);
@@ -13,7 +12,7 @@ export const getAllUsers = (req, res) =>{
             res.send(myResponse);
         });
     }catch{
-        res.status(400).send();
+        res.send({"status": 400, "msg": "Users were not found"});
     }
 };
 
@@ -38,7 +37,7 @@ export const createNewUser = async (req , res) =>{
 
 export const login = (req, res) => {
     const [username, password]  = [req.body.username, req.body.password];
-    console.log(username, password);
+    console.log(req.body);
     let q = `SELECT password,email from ${sql.USER_INFO} WHERE first_name='${username}'`;
     sql.connection.query(q, async (error, row) => {
         if (error) throw error;
@@ -47,12 +46,12 @@ export const login = (req, res) => {
             const flag = await auth.compare_hasedPassword(``+password, ``+data[0]['password']);
             console.log(flag);
             if (flag) {
-                res.status(200).send("Login successfully");
+                res.send({"status": 200, "msg": "Login successfully"});
             } else {
-                res.status(400).send("User wasn't found 1");
+                res.send({"status": 400, "msg": "User wasn't found 1"});
             }
         } else {
-            res.status(400).send("User wasn't found 2");
+            res.send({"status": 400, "msg": "User wasn't found 2"});
         }
     });
 

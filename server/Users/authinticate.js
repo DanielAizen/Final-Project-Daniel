@@ -12,7 +12,6 @@ export const genarate_hashPassword = async (str) =>{
 
 export const compare_hasedPassword = async (user_pwd, db_pwd) =>{
     const res = await bcrypt.compare(`` + user_pwd, `` + db_pwd);
-    console.log(" int auth res= " +res);
     return res;
 };
 

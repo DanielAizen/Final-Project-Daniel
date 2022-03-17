@@ -23,10 +23,6 @@ app.get('/', (req, res)=>{
     res.send('test');
 });
 
-/*app.get('/users', (req, res) =>{
-    res.json(users);
-});*/
-
 app.get('/test_sql', async (req, res) => {
     /*connection.connect(error =>{
         if(error) throw error;
@@ -56,7 +52,6 @@ app.get('/test_sql2', async (req, res) => {
 const port = process.env.PORT || 5000;
 app.listen(port, ()=> {
     console.log(`Listening on port ${port}`);
-    console.log(sql.USER_INFO); // think on a better way to show this
 });
 
 app.use('/users', usersRoutes)
