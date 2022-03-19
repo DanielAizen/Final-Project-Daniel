@@ -2,10 +2,10 @@
 //import ES from './Elasticsearch/elasticsearch'
 import * as sql from './mysql_handler.js';
 import express from 'express';
+import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import helmet from 'helmet';
-import { genarate_token } from './Users/authinticate.js';
 import usersRoutes from './Routes/user.js'
 //const ES =  require('./Elasticsearch/elasticsearch');
 //const sql = require('./mysql_handler');
@@ -13,6 +13,7 @@ import usersRoutes from './Routes/user.js'
 
 //Express app setup
 const app = express();
+app.use(cookieParser());
 app.use(cors());
 app.use(bodyParser.json());
 app.use(helmet())

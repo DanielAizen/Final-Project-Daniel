@@ -46,7 +46,8 @@ export const login = (req, res) => {
             const flag = await auth.compare_hasedPassword(``+password, ``+data[0]['password']);
             console.log(flag);
             if (flag) {
-                res.send({"status": 200, "msg": "Login successfully"});
+                const login_cookie = auth.genarate_token();
+                res.json({'status': 200, "msg": "Login successfully", "result": login_cookie});
             } else {
                 res.send({"status": 400, "msg": "User wasn't found 1"});
             }

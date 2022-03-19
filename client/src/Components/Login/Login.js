@@ -19,6 +19,7 @@ const Login = () =>{
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
+            withCredentials: true,
             body: JSON.stringify({'username': username, 'password': password})
         };
         fetch('http://localhost:5000/users/login', requestOptions)
@@ -26,6 +27,7 @@ const Login = () =>{
         .then(response => {
             if (response.status === 200){
                 console.log(response);
+                document.cookie = "loginToken=" + response.result;
                 navigate('/management');
             }
             else{
@@ -38,13 +40,12 @@ const Login = () =>{
     };
 
     return(
-        <div>
-            <h1>Testing login</h1>
-            <div className='login-form'>
+        <div className='login-form'>
+            <h2 className='mb-2'>Testing login</h2>
                 <Card style={{width: '20rem'}}>
                     <Form>
                         <Form.Group className='mb-3' controlId='form-username'> {/* change later on to support email */}
-                            <Form.Label>Username</Form.Label>
+                            <Form.Label className="mb-3">Username</Form.Label>
                             <Form.Control type='text' row={3} placeholder='Enter your username'/>                    
                         </Form.Group>
 
@@ -55,7 +56,6 @@ const Login = () =>{
                         <Button variant='primary' type='submit' onClick={(e) => handleLogin(e)}>Submit</Button>   
                     </Form>
                 </Card> 
-            </div>
             <div className='add'>
                 <p>add login form</p>
                 <Link to='/signup'><p>Signup here</p></Link>
