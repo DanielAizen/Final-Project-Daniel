@@ -1,28 +1,27 @@
 import React,{ useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Form, Button, Card } from 'react-bootstrap';
+import { useForm } from 'react-hook-form';
+//import { Form, Button, Card } from 'react-bootstrap';
 
 import './Login.css';
 
-const Login = () =>{
-    const navigate = useNavigate()
+const Login = (props) =>{
     const [inputError, setInputError] = useState(null)
+    const { register, handleSubmit, formState:{errors}, reset} = useForm()
+    const navigate = useNavigate()
 
-    const handleLogin = (e) =>{
-        e.preventDefault();
-        const username = document.getElementById("form-username").value;
-        const password = document.getElementById("form-password").value;
-        if (username.length <= 0 || password.length <=0 ){
-            setInputError("Please enter both email and password");
-            return
-        }
+
+    const onFormSubmit = (value) =>{
+        const username = value.username;
+        const password = value.password;
+
         const requestOptions = {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             withCredentials: true,
             body: JSON.stringify({'username': username, 'password': password})
         };
-        fetch('http://localhost:5000/users/login', requestOptions)
+        fetch(props.base_url + '/users/login', requestOptions)
         .then(response => response.json())
         .then(response => {
             if (response.status === 200){
@@ -31,7 +30,7 @@ const Login = () =>{
                 navigate('/management');
             }
             else{
-                setInputError(response.msg);
+                setInputError("Either username or password are incorrect");
             }
         }).catch(err => {
             console.log(err);
@@ -40,27 +39,50 @@ const Login = () =>{
     };
 
     return(
-        <div className='login-form'>
-            <h2 className='mb-2'>Testing login</h2>
-                <Card style={{width: '20rem'}}>
-                    <Form>
-                        <Form.Group className='mb-3' controlId='form-username'> {/* change later on to support email */}
-                            <Form.Label className="mb-3">Username</Form.Label>
-                            <Form.Control type='text' row={3} placeholder='Enter your username'/>                    
-                        </Form.Group>
+        <>
+            <div className='login-page flexbox-container'>
+                <div className='flexbox-item-1'>
+                    <form className='login-form ' onSubmit={handleSubmit(onFormSubmit)}>
+                        <div className='form-header'>
+                            <h3>Sign-In</h3>
+                        </div>
+                        <div className='login-container'>
+                            <label>Username:
+                                <input
+                                    {...register("username", {
+                                        required: true,
+                                        pattern: /\D+$/i,
+                                        maxLength:20
+                                    })}
+                                    placeholder="Enter your username please"
+                                />
+                                {errors?.username?.type === "required" && <p>This field is required</p>}
+                                {errors?.username?.type === "pattern" && (<p>Must Contain only alphabetical characters</p>)}
+                                {errors?.username?.type === "maxLength" && (<p>First name cannot exceed 20 charcters</p>)}
+                            </label>
+                            <label>Password:
+                                <input
+                                    {...register("password", {
+                                        required: true,
 
-                        <Form.Group className='mb-3' controlId='form-password'>
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder='Enter your password'/>    
-                        </Form.Group>
-                        <Button variant='primary' type='submit' onClick={(e) => handleLogin(e)}>Submit</Button>   
-                    </Form>
-                </Card> 
-            <div className='add'>
-                <p>add login form</p>
-                <Link to='/signup'><p>Signup here</p></Link>
+                                    })}
+                                    placeholder="Enter your password please"
+                                    type='password'
+                                />
+                                {errors?.password?.type === "required" && <p>This field is required</p>}
+                            </label>
+                            <input type="submit" value="Submit"/>
+                        </div>
+                        <div className='flexbox-error'>
+                            <span>{inputError ? inputError : ""}</span>
+                        </div>
+                    </form>  
+                </div> 
+                <div className='flexbox-item-2'>
+                    <Link to='/signup'>Signup here</Link>
+                </div>
             </div>
-        </div>
+        </>
     )
 }
 

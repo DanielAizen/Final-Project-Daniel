@@ -8,7 +8,7 @@ import { BrowserRouter ,Routes, Route, Navigate, Redirect } from 'react-router-d
 import { useState } from 'react';
 
 function App() {
-  const base_url = window.location.protocol + "//" + window.location.host;
+  const base_url = window.location.protocol + "//" + window.location.hostname + ":5000";
   const [user, setUser] = useState(undefined);
   
   return (
@@ -16,9 +16,8 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>}/>
-          <Route exact path="/login" element={<Login />}/>
+          <Route exact path="/login" element={<Login base_url={base_url}/>}/>
           <Route exact path='/management' element={<Management/>}/>
-
           <Route path='/signup' element={<Signup/>}/>
         </Routes>
       </BrowserRouter>
