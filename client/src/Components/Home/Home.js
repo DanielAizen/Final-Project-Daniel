@@ -12,7 +12,10 @@ const Home = () =>{
                     <Button variant="outline-primary" size="lg">log in</Button>
                 </div>
             </Link>
-            <h1>In Home</h1>
+            <div>
+                <h1>Final Project - Identifying Atteckers Online</h1>
+                <span className='span-home'>This project was made by: Daniel Aizenband</span>
+            </div>
         </div>
     )
 }

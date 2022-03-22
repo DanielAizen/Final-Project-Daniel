@@ -1,3 +1,9 @@
+.Home {
+ display: flex;
+ justify-content: center;
+ align-items: center;
+ align-content: center;
+}
 .main-div {
     margin: 10px;
     padding: 5px;
@@ -5,7 +11,12 @@
     top: 0;
     right: 0;
 }
-.Home h1 {
+.span-home{
+    font-size: larger;
+    color: rgb(0, 0, 0);
+}
+
+h1 {
     border-bottom: 3px solid rgba(3, 7, 245, 0.836);
     margin: auto;
     padding-top: 100px;

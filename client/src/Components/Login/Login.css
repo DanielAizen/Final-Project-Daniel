@@ -41,11 +41,11 @@ margin: 150px;
 padding: 10px;
 }
 
-span{
+.span-login{
     font-size: larger;
 }
 
-p, span{
+.p-login, .span-login{
 color: red;
 display: block;
 margin-block-start: 1em;

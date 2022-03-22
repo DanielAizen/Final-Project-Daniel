@@ -1,0 +1,14 @@
+.management{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+}
+
+.elk-container{
+    border: 10px;
+    border-color: aqua;
+    min-height: 100px;
+    min-width: 100px;
+}

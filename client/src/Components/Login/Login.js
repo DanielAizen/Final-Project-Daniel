@@ -28,6 +28,7 @@ const Login = (props) =>{
                 console.log(response);
                 document.cookie = "loginToken=" + response.result;
                 navigate('/management');
+                props.setUser({'username': username, 'token': response.result})
             }
             else{
                 setInputError("Either username or password are incorrect");
@@ -56,9 +57,9 @@ const Login = (props) =>{
                                     })}
                                     placeholder="Enter your username please"
                                 />
-                                {errors?.username?.type === "required" && <p>This field is required</p>}
-                                {errors?.username?.type === "pattern" && (<p>Must Contain only alphabetical characters</p>)}
-                                {errors?.username?.type === "maxLength" && (<p>First name cannot exceed 20 charcters</p>)}
+                                {errors?.username?.type === "required" && <p className='p-login'>This field is required</p>}
+                                {errors?.username?.type === "pattern" && (<p className='p-login'>Must Contain only alphabetical characters</p>)}
+                                {errors?.username?.type === "maxLength" && (<p className='p-login'>First name cannot exceed 20 charcters</p>)}
                             </label>
                             <label>Password:
                                 <input
@@ -69,12 +70,12 @@ const Login = (props) =>{
                                     placeholder="Enter your password please"
                                     type='password'
                                 />
-                                {errors?.password?.type === "required" && <p>This field is required</p>}
+                                {errors?.password?.type === "required" && <p className='p-login'>This field is required</p>}
                             </label>
                             <input type="submit" value="Submit"/>
                         </div>
                         <div className='flexbox-error'>
-                            <span>{inputError ? inputError : ""}</span>
+                            <span className='span-login'>{inputError ? inputError : ""}</span>
                         </div>
                     </form>  
                 </div> 
