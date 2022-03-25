@@ -1,17 +1,57 @@
 import React from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
 
-import './Management.css'
-const Management = () => {
+
+//import './Management.css'
+const Management = (props) => {
 
 
     return(
-        <div className="management">
-            <h1>In Management</h1>
-            <div className="elk-container">
-                
-            </div>
-        </div>
-        
+        <>
+            {console.log('in management', props.userInfo)}
+            <h1>In Managment</h1>
+            <Container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center'}}>
+                <Row xs={'auto'}>
+                    <Col className="p-1">
+                        <Card style={{ width: '18rem', padding: '10px', margin: '30px', borderWidth: '2px'}}>
+                            <Card.Body>
+                                <Card.Title>Card Title</Card.Title>
+                                <Card.Text>
+                                Some quick example text to build on the card title and make up the bulk of
+                                the card's content.
+                                </Card.Text>
+                                <Button variant="primary">Go somewhere</Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col className="p-1">
+                        <Card style={{ width: '18rem', padding: '10px', margin: '30px', borderWidth: '2px'}}>
+                            <Card.Body>
+                                <Card.Title>Card Title</Card.Title>
+                                <Card.Text>
+                                Some quick example text to build on the card title and make up the bulk of
+                                the card's content.
+                                </Card.Text>
+                                <Button variant="primary">Go somewhere</Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                    <Col className="p-1">
+                        <Card style={{ width: '18rem', padding: '10px', margin: '30px', borderWidth: '2px'}}>
+                            <Card.Body>
+                                <Card.Title>Card Title</Card.Title>
+                                <Card.Text>
+                                Some quick example text to build on the card title and make up the bulk of
+                                the card's content.
+                                </Card.Text>
+                                <Button variant="primary">Go somewhere</Button>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                </Row>
+            </Container>
+
+        </> 
     )
 }
 

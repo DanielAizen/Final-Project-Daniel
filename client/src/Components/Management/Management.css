@@ -9,6 +9,7 @@
 .elk-container{
     border: 10px;
     border-color: aqua;
+    border-width: 5px;
     min-height: 100px;
     min-width: 100px;
 }

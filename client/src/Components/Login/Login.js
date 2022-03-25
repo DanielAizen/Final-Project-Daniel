@@ -7,9 +7,8 @@ import './Login.css';
 
 const Login = (props) =>{
     const [inputError, setInputError] = useState(null)
-    const { register, handleSubmit, formState:{errors}, reset} = useForm()
+    const { register, handleSubmit, formState:{errors}} = useForm()
     const navigate = useNavigate()
-
 
     const onFormSubmit = (value) =>{
         const username = value.username;
