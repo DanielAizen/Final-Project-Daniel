@@ -3,7 +3,7 @@ import  {useState, createContext } from "react";
 
 export const AuthContext = createContext();
 
-export const AuthContextProvider = ({ childern }) =>{
+export const AuthContextProvider = ({ children }) =>{
     const [user, setUser] = useState({
         user: null,
         auth_token: null,
@@ -13,7 +13,7 @@ export const AuthContextProvider = ({ childern }) =>{
 
     return (
         <AuthContext.Provider value={{user, setUser}}>
-            { childern }
+            { children }
         </AuthContext.Provider>
     );
 }

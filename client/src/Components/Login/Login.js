@@ -4,11 +4,13 @@ import { useForm } from 'react-hook-form';
 //import { Form, Button, Card } from 'react-bootstrap';
 
 import './Login.css';
+import { useAuthContext } from '../../Hooks/useAuthContext';
 
 const Login = (props) =>{
     const [inputError, setInputError] = useState(null)
     const { register, handleSubmit, formState:{errors}} = useForm()
     const navigate = useNavigate()
+    const { setUser } = useAuthContext()
 
     const onFormSubmit = (value) =>{
         const username = value.username;
@@ -27,7 +29,7 @@ const Login = (props) =>{
                 console.log(response);
                 document.cookie = "loginToken=" + response.result;
                 navigate('/management');
-                props.setUser({'username': username, 'token': response.result})
+                setUser({user: username, auth_token: response.result, is_auth: true})
             }
             else{
                 setInputError("Either username or password are incorrect");

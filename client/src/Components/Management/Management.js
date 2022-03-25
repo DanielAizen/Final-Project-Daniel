@@ -1,14 +1,15 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import { useAuthContext } from "../../Hooks/useAuthContext";
 
 
 //import './Management.css'
 const Management = (props) => {
-
+    const {user, setUser} = useAuthContext()
 
     return(
         <>
-            {console.log('in management', props.userInfo)}
+            {console.log('in management', user)}
             <h1>In Managment</h1>
             <Container style={{display: 'flex', justifyContent: 'center', alignItems: 'center', alignContent: 'center'}}>
                 <Row xs={'auto'}>
