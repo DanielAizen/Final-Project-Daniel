@@ -5,13 +5,12 @@ import Signup from './Components/Signup/Signup';
 import Home from './Components/Home/Home';
 import Management from './Components/Management/Management'
 import { BrowserRouter ,Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
 import { useAuthContext } from './Hooks/useAuthContext';
+import QueryPage from './Components/QueryPage';
 
 function App() {
   const base_url = window.location.protocol + "//" + window.location.hostname + ":5000";
-  //const [user, setUser] = useState(undefined);
-  const {user, setUser} = useAuthContext()
+  const {user} = useAuthContext()
   
 
   return (
@@ -24,6 +23,7 @@ function App() {
           {user.is_auth && <Route exact path="/login" element={<Navigate replace to='/management' base_url={base_url}/>}/>} 
           {!user.is_auth && <Route exact path="/management" element={<Navigate replace to='/login' base_url={base_url} />}/>}
           {user.is_auth && <Route exact path='/management' element={<Management base_url={base_url}/>}/>}
+          {user.is_auth && <Route exact path='/query' element={<QueryPage base_url={base_url}/>}/>}
           <Route path='/signup' element={<Signup/>}/>
       </Routes>  
       </BrowserRouter>
