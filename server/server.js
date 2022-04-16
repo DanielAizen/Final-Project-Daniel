@@ -50,7 +50,7 @@ app.get('/test_sql2', async (req, res) => {
 });
 
 //Port definition
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 5002;
 app.listen(port, ()=> {
     console.log(`Listening on port ${port}`);
 });

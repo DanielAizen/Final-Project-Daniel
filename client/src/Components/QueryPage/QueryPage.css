@@ -1,0 +1,12 @@
+.query-container-header {
+    justify-content: flex-end;
+}
+
+.query-seacrh {
+    justify-content: center;
+    margin-top: 10vh;
+}
+
+.query-container-header > button {
+    margin: 16px 10px 0 28px;
+}

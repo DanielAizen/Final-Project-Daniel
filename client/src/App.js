@@ -6,10 +6,10 @@ import Home from './Components/Home/Home';
 import Management from './Components/Management/Management'
 import { BrowserRouter ,Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthContext } from './Hooks/useAuthContext';
-import QueryPage from './Components/QueryPage';
+import QueryPage from './Components/QueryPage/QueryPage';
 
 function App() {
-  const base_url = window.location.protocol + "//" + window.location.hostname + ":5000";
+  const base_url = window.location.protocol + "//" + window.location.hostname + ":5002";
   const {user} = useAuthContext()
   
 
