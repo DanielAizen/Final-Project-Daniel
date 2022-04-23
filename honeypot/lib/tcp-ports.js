@@ -1,4 +1,4 @@
-const list = {
+export const list = {
 	// 80: "http", // Taken by express.js or nginx
 	23: "telnet",
 	// 443: "https", // Taken by nginx
@@ -7,12 +7,11 @@ const list = {
 	// 25: "smtp",
 	3389: "RDP",
 	110: "POP3",
-	445: "microsoft-ds",
 	139: "NetBIOS",
 	143: "IMAP",
 	53: "DNS",
 	135: "msrpc",
-	3306: "MySQL",
+	//3306: "MySQL",
 	8080: "http-proxy",
 	1723: "pptp",
 	111: "rpcbind",
@@ -128,8 +127,3 @@ const list = {
 	17: "qotd",
 	808: "ccproxy-http"
 };
-
-list[27017] = 'MongoDB';
-list[11211] = 'memcached';
-
-module.exports = list;

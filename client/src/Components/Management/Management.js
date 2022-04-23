@@ -34,7 +34,7 @@ const Management = (props) => {
                                 <Card.Text>
                                 Query logs for further information.
                                 </Card.Text>
-                                <Button variant="primary" onClick={() => navigate('/query')}>Go somewhere</Button>
+                                <Button variant="primary" onClick={() => navigate('/honeypot')}>Go somewhere</Button>
                             </Card.Body>
                         </Card>
                     </Col>

@@ -1,15 +1,19 @@
-const config = require('./../config');
-const mysqlPool = require('mysql').createPool(config.mysql_connection_string);
-const EventEmitter = require('events');
-const chalk = require('chalk');
+//const config = require('./../config');
+import {config} from './../config.js';
+//const mysqlPool = require('mysql').createPool(config.mysql_connection_string);
+import mysql from 'mysql';
+import EventEmitter from 'events';
 
-class Mysql extends EventEmitter {
+export const mysqlPool = mysql.createPool(config.mysql_connection_string);
+
+export const REQUEST = 'request';
+
+export class Mysql extends EventEmitter {
 	constructor() {
 		super();
-
 		mysqlPool.query('SELECT 1 + 1 AS two', (error) => {
 			if (error) {
-				console.log(chalk.bgYellow.bold('Warning:') + ' Cannot connect to the MySQL server. Error Code: ' + error.code);
+				console.log(' Cannot connect to the MySQL server. Error Code: ' + error.code);
 				return;
 			}
 			this.init();
@@ -61,7 +65,7 @@ class Mysql extends EventEmitter {
 	}
 }
 
-const monthlyStats = {
+export const monthlyStats = {
 	data: {},
 	services: () => {
 		return new Promise((resolve, reject) => {
@@ -155,7 +159,7 @@ const monthlyStats = {
 	}
 };
 
-const saveToDatabase = (item) => {
+export const saveToDatabase = (item) => {
 	let request = {
 		'ip': item.ip,
 		'service': item.service,
@@ -175,7 +179,7 @@ const saveToDatabase = (item) => {
 	});
 };
 
-const formatHeaders = (headers, indent) => {
+export const formatHeaders = (headers, indent) => {
 	if (typeof headers !== 'object' || headers.length === 0) return;
 	indent = indent ? indent : '';
 	let s = '';
@@ -191,13 +195,13 @@ const formatHeaders = (headers, indent) => {
 	return s;
 };
 
-const formatIpAddress = (address) => {
+export const formatIpAddress = (address) => {
 	if (address.length !== 0 && address.substr(0, 7) === "::ffff:") return address.substr(7);
 
 	return address;
 };
 
-const removeOldData = (data) => {
+export const removeOldData = (data) => {
 	for (let i = 0; i < data.length; i++) {
 		if (data.length <= 25) return data;
 		let item = data[i];
@@ -208,10 +212,10 @@ const removeOldData = (data) => {
 	return data;
 };
 
-module.exports = {
+/*module.exports = {
 	formatHeaders: formatHeaders,
 	saveToDatabase: saveToDatabase,
 	formatIpAddress: formatIpAddress,
 	removeOldData: removeOldData,
 	Mysql: Mysql
-};
+};*/

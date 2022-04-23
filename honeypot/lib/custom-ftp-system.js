@@ -1,6 +1,6 @@
-const {FtpSrv, FileSystem} = require('ftp-srv');
+import {FtpSrv, FileSystem} from 'ftp-srv';
 
-class MyFileSystem extends FileSystem {
+export class MyFileSystem extends FileSystem {
 	constructor() {super(...arguments);}
 	currentDirectory() {}
 	get(fileName) {}
@@ -14,4 +14,3 @@ class MyFileSystem extends FileSystem {
 	chmod(path, mode) {}
 }
 
-module.exports = MyFileSystem;

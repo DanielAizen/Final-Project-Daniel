@@ -10,6 +10,7 @@ import QueryPage from './Components/QueryPage/QueryPage';
 
 function App() {
   const base_url = window.location.protocol + "//" + window.location.hostname + ":5002";
+  const honeypot_url = window.location.protocol + "//127.0.0.1:80";
   const {user} = useAuthContext()
   
 
@@ -23,7 +24,7 @@ function App() {
           {user.is_auth && <Route exact path="/login" element={<Navigate replace to='/management' base_url={base_url}/>}/>} 
           {!user.is_auth && <Route exact path="/management" element={<Navigate replace to='/login' base_url={base_url} />}/>}
           {user.is_auth && <Route exact path='/management' element={<Management base_url={base_url}/>}/>}
-          {user.is_auth && <Route exact path='/query' element={<QueryPage base_url={base_url}/>}/>}
+          {user.is_auth && <Route exact path='/honeypot' element={<QueryPage base_url={base_url} honeypot_url={honeypot_url}/>}/>}
           <Route path='/signup' element={<Signup/>}/>
       </Routes>  
       </BrowserRouter>

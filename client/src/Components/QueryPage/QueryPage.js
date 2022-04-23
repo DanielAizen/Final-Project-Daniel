@@ -1,14 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../Hooks/useAuthContext";
 
 import "./QueryPage.css";
 
-const QueryPage = () => {
+const QueryPage = (props) => {
     const {user} = useAuthContext();
     const navigate = useNavigate()
-    
+    const [data, setData] = useState([]);
+
+    /*useEffect(() =>{
+        const newSocket = io(props.honeypot_url);
+        setSocket(newSocket);
+        newSocket.on('getAllData', dataFS => {
+            setData(dataFS);
+        });
+    }, []);*/
+
+    useEffect(() => {
+        fetch(props.honeypot_url + '/honeypot/get_all', {headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Cache-Control': 'no-cache, no-store, must-revalidate'}})
+        .then(response => response.json())
+        .then(response => {
+            console.log(response);
+            if (response.status === 200){
+                setData(response.result);
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+    }, []);
 
     const handleSearch = () => {
         const searchValue = document.querySelector("#search").value;

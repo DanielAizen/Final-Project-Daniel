@@ -1,11 +1,15 @@
-const config = require('./../config');
-const helper = require('./../lib/helper');
-const EventEmitter = require('events');
-const fs = require('fs');
+import {config} from './../config.js';
+import {formatHeaders, formatIpAddress} from './../lib/helper.js';
+import EventEmitter from 'events';
+import * as fs from 'fs';
+import net from 'net';
+import FtpSrv from 'ftp-srv';
+import ssh2 from 'ssh2';
+/*const fs = require('fs');
 const net = require('net');
 const FtpSrv = require('ftp-srv');
-const ssh2 = require('ssh2');
-const chalk = require('chalk');
+const ssh2 = require('ssh2');*/
+
 
 class SocketServer extends EventEmitter {
 	/**
@@ -24,8 +28,8 @@ class SocketServer extends EventEmitter {
 	}
 
 	onError(err) {
-		if (err.code === 'EADDRINUSE') console.log(chalk.bgYellow.bold('Warning:') + ' Cannot start `' + this.name + '` service on port ' + this.port + '. Error Code: EADDRINUSE, Address already in use.');
-		else if (err.code === 'EACCES') console.log(chalk.bgYellow.bold('Warning:') + ' Cannot start `' + this.name + '` service on port ' + this.port + '. Error Code: EACCES, Permission Denied.');
+		if (err.code === 'EADDRINUSE') console.log(' Cannot start `' + this.name + '` service on port ' + this.port + '. Error Code: EADDRINUSE, Address already in use.');
+		else if (err.code === 'EACCES') console.log(' Cannot start `' + this.name + '` service on port ' + this.port + '. Error Code: EACCES, Permission Denied.');
 		else throw new Error(err);
 	}
 }
@@ -33,7 +37,7 @@ class SocketServer extends EventEmitter {
 class SshSocketServer extends SocketServer {
 	start() {
 		new ssh2.Server({
-			hostKeys: [fs.readFileSync(__dirname + '/../etc/ssh2.private.key')],
+			hostKeys: [fs.readFileSync('D:\\Final-Project\\honeypot\\etc\\ssh2.private.key')],
 			banner: 'Hi there!',
 			ident: 'OpenSSH_7.6'
 		}, (client) => {
@@ -47,7 +51,7 @@ class SshSocketServer extends SocketServer {
 							'ip': client._client_info.ip,
 							'service': this.name,
 							'request': (ctx.username && ctx.username.length !== '') ? this.name + ' ' + ctx.username + '@' + config.server_ip + ':' + this.port : this.name + ' ' + config.server_ip + ':' + this.port,
-							'request_headers': helper.formatHeaders(client._client_info.header)
+							'request_headers': formatHeaders(client._client_info.header)
 						});
 					}
 					ctx.accept();
@@ -69,10 +73,10 @@ class SshSocketServer extends SocketServer {
 class FtpSocketServer extends SocketServer {
 	start() {
 		new FtpSrv('ftp://0.0.0.0:' + this.port, {
-			fs: require('./custom-ftp-file-system'),
+			fs: fs,
 			greeting: 'Hi There!',
 			anonymous: true,
-			log: require('bunyan').createLogger({level: 60, name: 'noname'})
+			//log: require('bunyan').createLogger({level: 60, name: 'noname'})
 		}).on('login', ({connection, username, password}, resolve, reject) => {
 			connection.close();
 			this.emit('data', {
@@ -115,7 +119,7 @@ class GenericSocketServer extends SocketServer {
 
 	log(socket, data) {
 		let ip = socket.remoteAddress;
-		ip = helper.formatIpAddress(ip);
+		ip = formatIpAddress(ip);
 		let info = {
 			'ip': ip,
 			'service': this.name,
@@ -143,4 +147,4 @@ const CustomSocketServer = (port, name) => {
 	}
 };
 
-module.exports = CustomSocketServer;
+export default CustomSocketServer;
