@@ -116,9 +116,7 @@ app.all('*', (req, res) => {
 app.use('/honeypot', honeypotRoutes);
 const server_port = config.nginx_reverse_proxy === true ? config.express_js_alternative_port : 80;
 server.listen(server_port);
-/*app.listen(5004, ()=> {
-    console.log(`Listening on port 5004`);
-});*/
+
 console.log(`Server running at http://${config.server_ip}:${server_port}/`);
 
 /**
