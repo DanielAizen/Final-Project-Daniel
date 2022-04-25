@@ -1,8 +1,7 @@
-const EventEmitter = require('events');
-const {spawn} = require('child_process');
-const chalk = require('chalk');
+import EventEmitter from 'events';
+import * as child_process from 'child_process';
 
-class IcmpEchoLogger extends EventEmitter {
+export class IcmpEchoLogger extends EventEmitter {
 	constructor() {
 		super();
 		this.start();
@@ -11,9 +10,10 @@ class IcmpEchoLogger extends EventEmitter {
 	start() {
 		let cmd = 'tcpdump';
 		let args = ['-nvvv', '-l', '-i', 'eth0', 'icmp', 'and', 'icmp[icmptype]=icmp-echo'];
-		this.tcpdumpProcess = spawn(cmd, args, {stdio: ['ignore', 'pipe', 'ignore']});
+		//let args = ['-w', '-'];
+		this.tcpdumpProcess = child_process.spawn(cmd, args, {stdio: ['ignore', 'pipe', 'ignore']});
 		this.tcpdumpProcess.on('error', (err) => {
-			console.log(chalk.bgYellow.bold('Warning:') + ' Cannot spawn tcpdump. Error code: ' + err.code);
+			console.log(' Cannot spawn tcpdump. Error code: ' + err.code);
 		});
 		this.tcpdumpProcess.stdout.on('data', (data) => {
 			let echo_request = data.toString();
@@ -32,5 +32,3 @@ class IcmpEchoLogger extends EventEmitter {
 		});
 	}
 }
-
-module.exports = IcmpEchoLogger;
