@@ -4,10 +4,10 @@ export const getAll= (req, res) => {
     console.log("in honeypot controller");
     try{
         sql.mysqlPool.getConnection((err, connection) => {
-            connection.query(`SELECT date, ip, service, request, request_headers, http_request_path FROM request`, (error, results, fields) => {
+            connection.query(`SELECT date, ip, service, request, request_headers, http_request_path FROM request ORDER BY id DESC LIMIT 10`, (error, rows) => {
                 connection.release();
                 if (error) throw error;
-                const response = {'status': 200, 'msg': 'OK', 'result': JSON.stringify(results)};
+                const response = {'status': 200, 'msg': 'OK', 'result': rows};
                 res.send(response);
             });
         });

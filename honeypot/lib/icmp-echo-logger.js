@@ -10,7 +10,6 @@ export class IcmpEchoLogger extends EventEmitter {
 	start() {
 		let cmd = 'tcpdump';
 		let args = ['-nvvv', '-l', '-i', 'eth0', 'icmp', 'and', 'icmp[icmptype]=icmp-echo'];
-		//let args = ['-w', '-'];
 		this.tcpdumpProcess = child_process.spawn(cmd, args, {stdio: ['ignore', 'pipe', 'ignore']});
 		this.tcpdumpProcess.on('error', (err) => {
 			console.log(' Cannot spawn tcpdump. Error code: ' + err.code);
