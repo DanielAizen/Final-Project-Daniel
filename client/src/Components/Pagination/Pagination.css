@@ -1,0 +1,47 @@
+
+.pg-container {
+    float: right;
+    font-size: 12px;
+}
+.pg-container > div {
+    display: inline-flex;
+    margin: 42px 0;
+}
+
+.controller {
+    width: 14px;
+    margin-right: 8px;
+    padding: 5px 7px;
+    border: 1px solid var(--colorLight5);
+    text-align: center;
+    background: var(--colorLight1);
+}
+
+.controller:hover {
+    cursor: pointer;
+}
+
+.controller.inactive {
+    color: var(--colorLight5);
+}
+
+.page-input {
+    width: 24px;
+    padding: 2px;
+    margin-right: 8px;
+    text-align: center;
+}
+
+.page-input::-webkit-outer-spin-button, .page-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.page-input[type=number] {
+  -moz-appearance: textfield;
+}
+
+.n-Of-Pages {
+    line-height: 28px;
+}
