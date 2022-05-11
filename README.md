@@ -1,16 +1,12 @@
 # Needs to be done:
-docker <br/>
-frontend - 1<br/>
+frontend - in prog<br/>
 react helmet<br/>
-Fix date not showing correctly.<br/>
-honeypot implementation<br/>
-create a table for logs<br/>
 maybe add user pages - think about permissions<br/>
 
 # Priority:
-1)query the database<br/>
-2)create a 2nd server using docker - mount honeypot<br/>
-3)create logs system in the honeypot<br/>
+1)create logs system in the honeypot<br/>
+2) emit attacks<br/>
+3)create logs for attacks<br/>
 
 # DONE:
 ## using database:
@@ -21,3 +17,8 @@ get all users <br/>
 connected database -> need to think about auth<br/>
 use token for another auth<br/>
 created a working login url <br/>
+Fix date not showing correctly.<br/>
+honeypot implementation<br/>
+create a table for logs<br/>
+query the database<br/>
+create a 2nd server using docker - mount honeypot<br/>
