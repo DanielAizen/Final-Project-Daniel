@@ -125,6 +125,5 @@ export const list = {
 	2967: "symantec-av",
 	3703: "adobeserver-3",
 	17: "qotd",
-	808: "ccproxy-http",
-	3002: "myServer"
+	808: "ccproxy-http"
 };
