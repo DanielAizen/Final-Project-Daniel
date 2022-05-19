@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { useAuthContext } from "../../Hooks/useAuthContext";
 
 import './Home.css'
+import FinalProjectIMG from '../../Images/FinalProject.PNG'
 
 const Home = () =>{
     const {user} = useAuthContext() 
@@ -27,6 +28,7 @@ const Home = () =>{
             <div>
                 <h1>Final Project - Identifying Atteckers Online</h1>
                 <span className='span-home'>This project was made by: Daniel Aizenband</span>
+                <div><img src={FinalProjectIMG}/></div>
             </div>
         </div>
     )

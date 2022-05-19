@@ -212,10 +212,3 @@ export const removeOldData = (data) => {
 	return data;
 };
 
-/*module.exports = {
-	formatHeaders: formatHeaders,
-	saveToDatabase: saveToDatabase,
-	formatIpAddress: formatIpAddress,
-	removeOldData: removeOldData,
-	Mysql: Mysql
-};*/

@@ -4,7 +4,7 @@ export const getAll= (req, res) => {
     console.log("in honeypot getAll");
     try{
         sql.mysqlPool.getConnection((err, connection) => {
-            connection.query(`SELECT date, ip, service, request, request_headers, http_request_path FROM request ORDER BY id DESC LIMIT 10`, (error, rows) => {
+            connection.query(`SELECT date, ip, service, request, request_headers, http_request_path FROM request ORDER BY id DESC LIMIT 20`, (error, rows) => {
                 connection.release();
                 if (error) throw error;
                 const response = {'status': 200, 'msg': 'OK', 'result': rows};
