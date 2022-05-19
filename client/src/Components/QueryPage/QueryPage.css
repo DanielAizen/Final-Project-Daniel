@@ -35,7 +35,25 @@ td,th {
 td {
     overflow: hidden;
     white-space: nowrap;
-    text-overflow: ellipsis; 
+    text-overflow: ellipsis;
+}
+
+td.td-hover:hover{
+    display: block;
+    border: 1px solid;
+    z-index: 10;
+    background: #70a7fa;
+    height: 60px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    position: absolute;
+    box-shadow: 0px 3px 15px 1px rgb(0 0 0 / 12%);
+    overflow-x: scroll;
+    text-align: center;
+    text-overflow: unset;
+    width: 35%;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 tr {

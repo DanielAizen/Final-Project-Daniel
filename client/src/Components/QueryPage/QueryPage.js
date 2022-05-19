@@ -18,6 +18,7 @@ export default function QueryPage (props) {
     const [currentSearch, setCurrentSearch] = useState(null);
     const [maxItems, setMaxItems] = useState(20);
     const [maxPages, setMaxPages] = useState(20);
+    const [showItem, setShowItem] = useState(false);
 
     useEffect(() => {
         fetch(props.honeypot_url + '/honeypot/get_all', {headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Cache-Control': 'no-cache, no-store, must-revalidate'}})
@@ -105,17 +106,16 @@ export default function QueryPage (props) {
                             </tr>
                         </thead>
                         <tbody>
-                            {data ? Object.keys(data).map( k => {
+                            {data ? Object.keys(data).map( (k,index) => {
                                     let t = Object.keys(data[k])
-                                    //console.log("k= ", k, data[k], new Date(data[k]['date']).toUTCString().replace("GMT", "").trimEnd())
                                     return (
-                                        <tr> {/**TODO add btn to show more info about a row */}
+                                        <tr> 
                                             <td>{new Date(data[k]['date']).toUTCString().replace("GMT", "").trimEnd()}</td>
                                             <td>{data[k]['ip']}</td>
-                                            <td> {data[k]['service']} </td>
-                                            <td> {data[k]['request']} </td>
-                                            <td> {data[k]['request_headers']} </td>
-                                            <td> {data[k]['http_request_path']} </td>
+                                            <td>{data[k]['service']} </td>
+                                            <td className="td-hover">{data[k]['request']}</td>
+                                            <td className="td-hover">{data[k]['request_headers']} </td>
+                                            <td>{data[k]['http_request_path']} </td>
                                         </tr>
                                     )
                                     }) : ""}
@@ -129,14 +129,6 @@ export default function QueryPage (props) {
                 itemsPerPage = {itemsPerPage}
             />
             </div>
-            {/*<div className="pg-container">
-                <div>
-                    <div className={"controller" + (currentPage === 1 ? " inactive" : "")} onClick={() => handleClick("previous")}>{"<"}</div>
-                    <input ref={pageInput} className="page-input" type="number" value={currentPage} onChange={() => handleClick()}/>
-                    <div className={"controller" + (currentPage === maxPages ? " inactive" : "")} onClick={() => handleClick("next")}>{">"}</div>
-                    <div className="n-Of-Pages">of {maxPages}</div>
-                </div>
-                                </div>*/}
         </>
     )
 }
