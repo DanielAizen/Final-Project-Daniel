@@ -1,7 +1,7 @@
 import React,{ useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-//import { Form, Button, Card } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 import './Login.css';
 import { useAuthContext } from '../../Hooks/useAuthContext';
@@ -42,6 +42,9 @@ const Login = (props) =>{
 
     return(
         <>
+            <div className='btn-container'>
+                <Button variant="outline-primary" onClick={() => navigate('/')}>Sign Out</Button>
+            </div>
             <div className='login-page flexbox-container'>
                 <div className='flexbox-item-1'>
                     <form className='login-form ' onSubmit={handleSubmit(onFormSubmit)}>
