@@ -1,4 +1,5 @@
 import * as sql from '../lib/helper.js';
+import { honey_auth } from '../lib/honey_auth.js';
 
 export const getAll= (req, res) => {
     console.log("in honeypot getAll");
@@ -55,6 +56,28 @@ export const search= (req, res)=> {
     }
 }
 
+export const auth_request = (req, res) => {
+    console.log("in honeypot auth");
+    if (Object.entries(req.body) !== 0){
+        const [username, password] = req.body;
+    } else if (Object.entries(req.body) !== 0) {
+        const query = [...req.query];
+    }
+    try {
+        sql.mysqlPool.getConnection( (err, connection) => {
+            if (honey_auth(username) || honey_auth(password)){
+                
+            } else if (honey_auth(query)){
+                
+            } else {
+                res.send({'status': 200, 'msg': 'OK'})
+            }
+            
+        })
+    } catch {
+        
+    }
+}
 
 export const test = (req,res) => {
     res.send({'status': 200, 'msg': 'test went ok'})

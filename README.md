@@ -22,3 +22,10 @@ honeypot implementation<br/>
 create a table for logs<br/>
 query the database<br/>
 create a 2nd server using docker - mount honeypot<br/>
+
+# TODO
+ * 1- create an additional database - id, request_body, timestamp, path
+ * 2- create a function that checks regex exp - e.x (1=1, " or ""="", <script>alert()</script>), broken authentication
+ * 3- update database in case of an attack
+
+ 
