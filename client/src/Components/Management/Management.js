@@ -34,29 +34,18 @@ const Management = (props) => {
                                 <Card.Text>
                                 Query logs for further information.
                                 </Card.Text>
-                                <Button variant="primary" onClick={() => navigate('/honeypot')}>View all logs</Button>
+                                <Button variant="primary" onClick={() => navigate('/honeypot_query')}>View all logs</Button>
                             </Card.Body>
                         </Card>
                     </Col>
                     <Col className="p-1">
                         <Card style={{ width: '18rem', padding: '10px', margin: '30px', borderWidth: '2px'}}>
                             <Card.Body>
-                                <Card.Title>Team's area</Card.Title>
+                                <Card.Title>Honeypot intercaptions</Card.Title>
                                 <Card.Text>
-                                Get information about current project running, and weekly goals.
+                                Get information about the latest user activity.
                                 </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col className="p-1">
-                        <Card style={{ width: '18rem', padding: '10px', margin: '30px', borderWidth: '2px'}}>
-                            <Card.Body>
-                                <Card.Title>Assignments</Card.Title>
-                                <Card.Text>
-                                Check the assignment that are distributed between team members.
-                                </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
+                                <Button variant="primary" onClick={() => navigate('/honeypot_logs')}>View recent activity</Button>
                             </Card.Body>
                         </Card>
                     </Col>

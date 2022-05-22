@@ -15,6 +15,11 @@ const Login = (props) =>{
     const onFormSubmit = (value) =>{
         const username = value.username;
         const password = value.password;
+        
+        const requestHoneyOptions = {
+            method: 'GET',
+            headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json'},
+        };
 
         const requestOptions = {
             method: 'POST',
@@ -22,17 +27,30 @@ const Login = (props) =>{
             withCredentials: true,
             body: JSON.stringify({'username': username, 'password': password})
         };
-        fetch(props.base_url + '/users/login', requestOptions)
+        fetch(props.honeypot_url + `/honeypot/honey_auth?username=${username}&password=${password}`, requestHoneyOptions)
         .then(response => response.json())
         .then(response => {
             if (response.status === 200){
-                console.log(response);
-                document.cookie = "loginToken=" + response.result;
+                fetch(props.base_url + '/users/login', requestOptions)
+                .then(response => response.json())
+                .then(response => {
+                    if (response.status === 200){
+                        console.log(response);
+                        document.cookie = "loginToken=" + response.result;
+                        navigate('/management');
+                        setUser({user: username, auth_token: response.result, is_auth: true})
+                    }
+                    else{
+                        setInputError("Either username or password are incorrect");
+                    }
+                }).catch(err => {
+                    console.log(err);
+                    setInputError("Oops, an error has occoured, try again");
+                });
+            } else if (response.honey_token) {
+                document.cookie = "honeyToken=" + response.honey_token;
                 navigate('/management');
-                setUser({user: username, auth_token: response.result, is_auth: true})
-            }
-            else{
-                setInputError("Either username or password are incorrect");
+                setUser({user: username, auth_token: response.honey_token, is_auth: true})
             }
         }).catch(err => {
             console.log(err);
