@@ -40,7 +40,8 @@ export const getAllLogs = (req, res) => {
 
 export const getCount= (req, res)=> {
     console.log("in honeypot getCount");
-    let table =  req.pathname === '/honeypot_query' ? Tables.REQUEST : Tables.HONEYPOT_LOGS
+    console.log(req.query);
+    let table =  req.query.sort === '1' ? Tables.REQUEST : Tables.HONEYPOT_LOGS
     try{
         sql.mysqlPool.getConnection((err, connection) => {
             connection.query(`SELECT COUNT(*) as maxRows FROM ${table}`, (error, rows) => {
@@ -116,7 +117,7 @@ export const auth_request = (req, res) => {
         insert = {'request_body': {'username': req.query.username, 'password': req.query.password}, 'path': req.route.path};
         flag = true;
     } else {
-        insert = {'request_body': {'username': req.body.username, 'password': req.body.password}, 'path': req.route.path};
+        insert = {'request_body': {'username': req.query.username, 'password': req.query.password}, 'path': req.route.path};
     }
     sql.mysqlPool.getConnection( (err, connection) => {
         let query = `INSERT INTO ${Tables.HONEYPOT_LOGS} (request_body, path) VALUES("username=${insert.request_body['username']}, password=${insert.request_body['password']}", "${insert.path}")`;

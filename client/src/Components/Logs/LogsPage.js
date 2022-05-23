@@ -23,16 +23,18 @@ export default function LogsPage (props) {
         fetch(props.honeypot_url + '/honeypot/get_all_logs', {headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Cache-Control': 'no-cache, no-store, must-revalidate'}})
         .then(response => response.json())
         .then(response => {
-            console.log(response.result, typeof response.result);
+            console.log(response);
             if (response.status === 200){
                 setData(response.result);
+                setMaxItems(response.result[0]['maxRows']);
+                setMaxPages(Math.ceil(response.result[0]['maxRows'] / itemsPerPage))
             }
         })
         .catch(err => {
             console.log(err);
         });
 
-        fetch(props.honeypot_url + '/honeypot/get_count', {headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Cache-Control': 'no-cache, no-store, must-revalidate'}})
+        fetch(props.honeypot_url + '/honeypot/get_count?sort=2', {headers: {'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json', 'Cache-Control': 'no-cache, no-store, must-revalidate'}})
         .then(response => response.json())
         .then(response => {
             console.log("getcount", response.result, response.result[0]['maxRows']);
