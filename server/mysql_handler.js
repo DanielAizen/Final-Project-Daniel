@@ -8,7 +8,6 @@ import mysql from 'mysql';
 };
 
 //Tables:
-export const TEST_TBL = 'test_tbl2';
 export const USER_INFO = 'user_info';
 
 

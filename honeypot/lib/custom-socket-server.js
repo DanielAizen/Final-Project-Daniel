@@ -5,11 +5,6 @@ import * as fs from 'fs';
 import net from 'net';
 import FtpSrv from 'ftp-srv';
 import ssh2 from 'ssh2';
-/*const fs = require('fs');
-const net = require('net');
-const FtpSrv = require('ftp-srv');
-const ssh2 = require('ssh2');*/
-
 
 class SocketServer extends EventEmitter {
 	/**

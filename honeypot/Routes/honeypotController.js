@@ -68,7 +68,8 @@ export const search= (req, res)=> {
                 const seacrh_value = req.query['searchValue'];
                 q += `WHERE request LIKE '%${seacrh_value}%'` 
             }
-            connection.query(`SELECT date, ip, service, request, request_headers, http_request_path FROM ${Tables.REQUEST} ORDER BY id DESC LIMIT ${req.query['upperLimit'] - req.query['lowerLimit']} OFFSET ${req.query['lowerLimit']}`, (error, rows) => {
+            connection.query(`SELECT date, ip, service, request, request_headers, http_request_path FROM ${Tables.REQUEST} ORDER BY id DESC LIMIT ${req.query['upperLimit'] - req.query['lowerLimit']} OFFSET ${req.query['lowerLimit']}`,
+            (error, rows) => {
                 connection.release();
                 if (error) throw error;
                 const response = {'status': 200, 'msg': 'OK', 'result': rows};

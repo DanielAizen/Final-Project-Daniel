@@ -1,10 +1,4 @@
-
-/*try {
-	config = require('./config');
-} catch (err) {
-	console.error(' config not found. Please create `./config.js` based on the `./config.js.template`.');
-}*/
-
+//Imports
 import { config }  from "./config.js";
 import express from 'express';
 import cors from 'cors';
@@ -18,16 +12,8 @@ import {IcmpEchoLogger} from './lib/icmp-echo-logger.js';
 import { Mysql, mysqlPool, formatHeaders, formatIpAddress, saveToDatabase, removeOldData } from "./lib/helper.js";
 import {list as tcp_ports} from './lib/tcp-ports.js';
 import honeypotRoutes from './Routes/honeypotRoutes.js';
-/*const express = require('express');
-const bodyParser = require('body-parser');
-const helmet = require('helmet');
-const io = require('socket.io')(server);
-const escape = require('escape-html');
-//const CustomSocketServer = require('./lib/custom-socket-server');
-const IcmpEchoLogger = require('./lib/icmp-echo-logger');
-const helper = require('./lib/helper');
-const tcp_ports = require('./lib/tcp-ports');*/
 
+//Constants & variables
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
@@ -62,21 +48,10 @@ const ping = new IcmpEchoLogger().on('data', (data) => {
 	emitData(data);
 });
 
-/* MySQL Helper */
-(new Mysql()).on('total_requests_number', (count) => {
-	total_requests_number = count;
-}).on('recent_credentials', (rows) => {
-	// Returns recent SSH/FTP usernames/passwords
-	recent_credentials = rows;
-}).on('monthly_stats', (stats) => {
-	monthly_stats = stats;
-});
-
 /* Express App */
 if (config.nginx_reverse_proxy) app.enable('trust proxy', 1);
 app.use(helmet());
 app.set('view engine', 'ejs');
-//app.set('views', './view');*/
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use((req, res, next) => {
 	let item = {
@@ -96,23 +71,7 @@ app.use((req, res, next) => {
 		next()
 	}
 });
-/*app.use(express.static('static'));
-app.get('/query', (req, res) => {
-	res.sendFile('view/index.html' , {lastModified: false, headers: {'Cache-Control': 'no-cache, no-store, must-revalidate', 'Expires': '0'}});
-});
-app.get('/stats', (req, res) => {
-	res.render('stats', {data: monthly_stats})
-});
-app.all('*', (req, res) => {
-	if (req.hostname === config.hostname || req.hostname === config.server_ip) {
-		let response = req.hostname ? req.method + ' ' + req.protocol + '://' + req.hostname + req.originalUrl : req.method + ' ' + req.originalUrl;
-		if (req.body.length !== 0) response+= "\r\n\r\n" + formatHeaders(req.body);
-		res.status(200).send("<pre>" + escape(response) + "</pre>");
-	}
-	else {
-		res.sendStatus(404);
-	}
-});*/
+
 app.use('/honeypot', honeypotRoutes);
 const server_port = config.nginx_reverse_proxy === true ? config.express_js_alternative_port : 80;
 server.listen(server_port);
