@@ -1,7 +1,7 @@
 # Identifying Attackers On The Web:
 
 ## Project Background
-> This is only a demo and doesn't represent the real purposed system
+> This is only a demo and doesn't represent the real purposed system.\
 The main purpose of the project is to provide the system administrator the tools needed to track suspicious activities of users on the web. Moreover, allow to identify and analyze the method of which the attacker attempted to exploit and create a vulnerability.
 In order to consider a successful outcome of the project I've defined criteria's which the proposed system must meet, these criteria are based on the OWASP top 10 common types of cyber-attacks. It is defined that it will intercept and identify at least 60-80% of the attack and classify correctly.
 
