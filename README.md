@@ -11,13 +11,13 @@ Open 3 terminals as shown here:
 ![image info](./captures/terminals.PNG)
 <br/>
 Then inside each terminal run the following commands
-- Server: Choose between two scripts - 
-  -- allows to run a live server that updates on change ``` npm run dev ```
-  -- allows to run live server ``` npm start ```
-- Client:
-  -- ```npm start ```
--Honeypot:
-  -- ```node honeypot.js ```
+* Server: Choose between two scripts - 
+  * allows to run a live server that updates on change ``` npm run dev ```
+  * allows to run live server ``` npm start ```
+* Client:
+  * ```npm start ```
+* Honeypot:
+  *  ```node honeypot.js ```
 
 The website will be available at [`http://localhost:5002`](http://localhost:5002)
 
